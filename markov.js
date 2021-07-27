@@ -6,7 +6,7 @@ class MarkovMachine {
   /** build markov machine; read in text.*/
 
   constructor(text) {
-    
+
     this.words = text.split(/[ \r\n]+/);
     this.chains = this.makeChains();
   }
@@ -34,19 +34,19 @@ class MarkovMachine {
 
   getText(numWords = 100) {
     let text = [];
-    let keys = Object.keys( this.chains );
-    let currWord = keys[ Math.floor( Math.random() * keys.length)];
+    let keys = Object.keys(this.chains);
+    let currWord = keys[Math.floor(Math.random() * keys.length)];
     
-    text.push( currWord );
+    text.push(currWord);
 
     while (text.length < numWords) {
-      let values = Object.values( this.chains[currWord]);
+      let values = Object.values(this.chains[currWord]);
       let randVal = values[Math.floor(Math.random() * values.length)];
       
-      if (randVal === undefined){
-          randVal = keys[Math.floor(Math.random() * keys.length)]
+      if (randVal === undefined) {
+        randVal = keys[Math.floor(Math.random() * keys.length)];
       }
-      
+
       text.push(randVal);
       
       currWord = text[text.length - 1]
@@ -54,4 +54,9 @@ class MarkovMachine {
 
     return text.join(" ");
   }
+}
+
+
+module.exports = {
+  MarkovMachine
 }
