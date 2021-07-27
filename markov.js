@@ -6,6 +6,7 @@ class MarkovMachine {
   /** build markov machine; read in text.*/
 
   constructor(text) {
+    
     this.words = text.split(/[ \r\n]+/);
     this.chains = this.makeChains();
   }
@@ -19,10 +20,11 @@ class MarkovMachine {
     let chains = {};
     
     for(let wordIndex in this.words) {
-      if (chains[words[wordIndex]]) {
-        chains[words[wordIndex]].push(words[wordIndex + 1]);
+      wordIndex = Number(wordIndex);
+      if (chains[this.words[wordIndex]]) {
+        chains[this.words[wordIndex]].push(this.words[wordIndex + 1]);
       } else {
-        chains[words[wordIndex]] = [words[wordIndex + 1]];
+        chains[this.words[wordIndex]] = [this.words[wordIndex + 1]];
       }
     }
     return chains;
@@ -32,14 +34,18 @@ class MarkovMachine {
 
   getText(numWords = 100) {
     let text = [];
-    let keys = Object.keys(chains);
-    let currWord = keys[Math.floor(Math.random() * keys.length)];
+    let keys = Object.keys( this.chains );
+    let currWord = keys[ Math.floor( Math.random() * keys.length)];
     
-    text.push(currWord);
+    text.push( currWord );
 
     while (text.length < numWords) {
-      let values = Object.values(chains[currWord]);
+      let values = Object.values( this.chains[currWord]);
       let randVal = values[Math.floor(Math.random() * values.length)];
+      
+      if (randVal === undefined){
+          randVal = keys[Math.floor(Math.random() * keys.length)]
+      }
       
       text.push(randVal);
       
