@@ -17,6 +17,14 @@ class MarkovMachine {
 
   makeChains() {
     // MORE CODE HERE
+    let chains = {};
+    
+    for(let wordIndex in words){
+      chains[words[wordIndex]] = words[wordIndex+1] || 0;
+      
+    }
+    
+    return chains;
   }
 
 
