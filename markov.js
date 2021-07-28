@@ -31,24 +31,27 @@ class MarkovMachine {
   }
 
   /** return random text from chains */
+
   getText(numWords = 100) {
     let text = [];
     let keys = Object.keys(this.chains);
+    // add .filter to keys to make all keys uppercase
     let currWord = keys[Math.floor(Math.random() * keys.length)];
     
     text.push(currWord);
 
     while (text.length < numWords) {
-      let values = Object.values(this.chains[currWord]);
-      let randVal = values[Math.floor(Math.random() * values.length)];
+      let values = this.chains[currWord];
+      let randVal = values[Math.floor(Math.random() * values.length - 1)];
       
-      if (randVal === undefined) {
-        randVal = keys[Math.floor(Math.random() * keys.length)];
-      }
+      // if (randVal === undefined) {
+      //   randVal = keys[Math.floor(Math.random() * keys.length)];
+      // }
+      // we shouldnt be getting undefined (might have to change length of keys or values above)
 
       text.push(randVal);
       
-      currWord = text[text.length - 1]
+      currWord = randVal
     }
 
     return text.join(" ");

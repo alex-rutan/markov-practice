@@ -1,8 +1,10 @@
 "use strict"
-/** Command-line tool to generate Markov text. */
+
 const fsP = require('fs/promises');
 const axios = require("axios");
 const { MarkovMachine } = require("./markov");
+
+/** Command-line tool to generate Markov text. */
 
 async function makeText(){
     
@@ -22,6 +24,9 @@ async function makeText(){
     
 }
 
+/** Taking in an input path, function returns a Markov Machine
+ * with text from the file at the path. */
+
 async function createMarkovFromFile(path){
     
     let content;
@@ -35,6 +40,9 @@ async function createMarkovFromFile(path){
     let mm = new MarkovMachine(content);
     return mm;
 }
+
+/** Taking in an input url, function returns a Markov Machine
+ * with text from the content of the url. */
 
 async function createMarkovFromSite(url){
     let content;
