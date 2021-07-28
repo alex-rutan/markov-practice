@@ -1,5 +1,5 @@
+"use strict"
 /** Textual markov chain generator */
-
 
 class MarkovMachine {
 
@@ -31,7 +31,6 @@ class MarkovMachine {
   }
 
   /** return random text from chains */
-
   getText(numWords = 100) {
     let text = [];
     let keys = Object.keys(this.chains);
